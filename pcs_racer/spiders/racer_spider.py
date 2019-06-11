@@ -8,27 +8,27 @@ class PcsSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for race in response.css('tbody tr'):
+        for racer in response.css('body'):
             item = pcsRacerItem() 
-            item['riderName'] = response.css('div.content div.entry h1::text').get()
-            item['teamName'] = response.css('div.content div.entry h1 span::text')[1].getall()
-            item['country'] = response.css('div.content div.entry span::attr(class)')[0].getall()
-            item['riderCountryFlag'] = response.css('div.content div.entry span::attr(class)')[0].getall()
-            item['countryLink'] = response.css('.rdr-info-cont a::attr(href)')[0].getall()
-            item['riderDetails'] = response.css('.rdr-img-cont a::attr(href)').getall()
-            item['riderImg'] = response.css('.rdr-img-cont a img::attr(src)').getall()
-            item['birth'] = response.css('.rdr-info-cont::text').getall()
-            item['placeOfBirth'] = response.css('.rdr-info-cont span span a::text')[0].getall()
-            item['height'] = response.css('.rdr-info-cont span::text')[1].getall()
-            item['wigtht'] = response.css('.rdr-info-cont span::text')[0].getall()
-            item['breakDown'] = response.css('.rdr-info-cont span span div a::attr(href)')[0].getall()
-            item['dataType'] = response.css('.pps span div::attr(data-type)').getall()
-            item['ppsPoint'] = response.css('.pps li  span::text').getall()
-            item['socialNetLink'] = response.css('.rdr-info-cont span span div a::attr(href)').re(r'^http.+')
-            item['pcsRankLink'] = response.css('.rdr-info-cont span span div a::attr(href)').re(r'^rank.+')[0]
-            item['worldRankLink'] = response.css('.rdr-info-cont span span div a::attr(href)').re(r'^rank.+')[1]
-            item['pcsRank'] = response.css('.rdrStandings span::text')[0].getall()
-            item['uciRank'] = response.css('.rdrStandings span::text')[2].getall()
+            item['riderName'] = racer.css('div.content div.entry h1::text').get()
+            item['teamName'] = racer.css('div.content div.entry h1 span::text')[1].get()
+            item['country'] = racer.css('div.content div.entry span::attr(class)')[0].get()
+            item['riderCountryFlag'] = racer.css('div.content div.entry span::attr(class)')[0].get()
+            item['countryLink'] = racer.css('.rdr-info-cont a::attr(href)')[0].get()
+            item['riderDetails'] = racer.css('.rdr-img-cont a::attr(href)').get()
+            item['riderImg'] = racer.css('.rdr-img-cont a img::attr(src)').get()
+            item['birth'] = racer.css('.rdr-info-cont::text').get()
+            item['placeOfBirth'] = racer.css('.rdr-info-cont span span a::text')[0].get()
+            item['height'] = racer.css('.rdr-info-cont span::text')[1].get()
+            item['wigtht'] = racer.css('.rdr-info-cont span::text')[0].get()
+            item['breakDown'] = racer.css('.rdr-info-cont span span div a::attr(href)')[0].get()
+            item['dataType'] = racer.css('.pps span div::attr(data-type)').get()
+            item['ppsPoint'] = racer.css('.pps li  span::text').get()
+            item['socialNetLink'] = racer.css('.rdr-info-cont span span div a::attr(href)').re(r'^http.+')
+            item['pcsRankLink'] = racer.css('.rdr-info-cont span span div a::attr(href)').re(r'^rank.+')[0]
+            item['worldRankLink'] = racer.css('.rdr-info-cont span span div a::attr(href)').re(r'^rank.+')[1]
+            item['pcsRank'] = racer.css('.rdrStandings span::text')[0].get()
+            item['uciRank'] = racer.css('.rdrStandings span::text')[2].get()
             yield item
 
         '''riderName = scrapy.Field()
