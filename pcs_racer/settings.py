@@ -9,10 +9,10 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'tutorial'
+BOT_NAME = 'pcs_racer'
 
-SPIDER_MODULES = ['tutorial.spiders']
-NEWSPIDER_MODULE = 'tutorial.spiders'
+SPIDER_MODULES = ['pcs_racer.spiders']
+NEWSPIDER_MODULE = 'pcs_racer.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'tutorial.pipelines.TutorialPipeline': 300,
+    'pcs_racer.pipelines.PcsRacerPipeline': 300,
 }
 MONGO_URI = 'mongodb://localhost:27017'
 MONGO_DATABASE = 'test'

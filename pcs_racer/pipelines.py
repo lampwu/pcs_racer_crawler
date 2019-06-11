@@ -9,9 +9,9 @@
 
 import pymongo
 
-class TutorialPipeline(object):
+class PcsRacerPipeline(object):
 
-    collection_name = 'pcsrace'
+    collection_name = 'pcsRacer'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
