@@ -124,3 +124,6 @@ class PcsSpider(scrapy.Spider):
     #prresShirtNameLinkSecond = prres.css('li ul li div a::attr(href)')[2].get()
     #prresShirtNameSecond = prres.css('li ul li div a::text')[2].get()
 
+    #dateList = prres.css('li ul li div::text').getall()
+    #stageList = prres.css('li ul li div a::text').getall()
+    #
