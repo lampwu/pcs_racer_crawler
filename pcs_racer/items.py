@@ -30,28 +30,22 @@ class pcsRacerItem(scrapy.Item):
     worldRankLink = scrapy.Field()
     pcsRank = scrapy.Field()
     uciRank = scrapy.Field()
-
-    #Top result
     stageOrGc = scrapy.Field()
-    stageOrGc = scrapy.Field() # response.css('ul.moblist div span.blue::text').get()
-    topResultRace = scrapy.Field()#response.css('ul.moblist div a::text').getall()
-    raceType = scrapy.Field()#response.css('ul.moblist div span.blue::text').getall()
-    raceRank = scrapy.Field()#response.css('ul.moblist div::text').getall()
-    yearOfRace = scrapy.Field()#response.css('ul.moblist div span::text').re(r'(\'\d.)')
-    #Teams
-    team = scrapy.Field()#response.css('div.div2 ul li span a::text').getall()
-    yearOfTeam = scrapy.Field()#response.css('div.div2 ul li span::text').re(r'\d{4}')
-    #Key statistics
-    keystatistics = scrapy.Field()#response.css('div.div2 ul.key-stats li div a::text').getall()
-    keyNumber = scrapy.Field()#response.css('div.div2 ul.key-stats li div::text').getall()
-    keyword = scrapy.Field()#response.css('div.div2 ul.key-stats li div span::text').getall()
-    #PCS Ranking position per season
-    season = scrapy.Field() #response.css('div.div4 ul.ranking-per-season li div.season a::text').getall()
-    rps_points = scrapy.Field() #response.css('div.div4 ul.ranking-per-season li div.bar div::text').getall()
-    rps_pos = scrapy.Field() #response.css('div.div4 ul.ranking-per-season li div.pos::text').getall()
-    #Results per season
-    season = scrapy.Field() #response.css('div.div3 ul.horiztree li a::text').getall()
-    seasonLink = scrapy.Field() #response.css('div.div3 a.seasonResults::attr(href)').getall()
+    topResultRace = scrapy.Field()
+    raceType = scrapy.Field()
+    raceRank = scrapy.Field()
+    yearOfRace = scrapy.Field()
+    team = scrapy.Field()
+    yearOfTeam = scrapy.Field()
+    keystatistics = scrapy.Field()
+    keyNumber = scrapy.Field()
+    keyword = scrapy.Field()
+    season = scrapy.Field()
+    rps_points = scrapy.Field()
+    rps_pos = scrapy.Field()
+    seasonLink = scrapy.Field()
+    prresHead = scrapy.Field()
+    
     #bio
 
         #riderName = response.css('div.content div.entry h1::text').get()

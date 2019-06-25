@@ -7,9 +7,17 @@ class PcsSpider(scrapy.Spider):
         'https://www.procyclingstats.com/rider/chad-haga'
     ]
 
+    '''def start_requests(self):
+        url = 'http://quotes.toscrape.com/'
+        tag = getattr(self, 'tag', None)
+        if tag is not None:
+            url = url + 'tag/' + tag
+        yield scrapy.Request(url, self.parse)'''
+
+
     def parse(self, response):
         for racer in response.css('body'):
-            item = pcsRacerItem() 
+            item = pcsRacerItem()
             item['riderName'] = racer.css('div.content div.entry h1::text').get()
             item['teamName'] = racer.css('div.content div.entry h1 span::text')[1].get()
             item['country'] = racer.css('div.content div.entry span::attr(class)')[0].get()
@@ -29,9 +37,64 @@ class PcsSpider(scrapy.Spider):
             item['worldRankLink'] = racer.css('.rdr-info-cont span span div a::attr(href)').re(r'^rank.+')[1]
             item['pcsRank'] = racer.css('.rdrStandings span::text')[0].get()
             item['uciRank'] = racer.css('.rdrStandings span::text')[2].get()
+            item['stageOrGc'] = response.css('ul.moblist div span.blue::text').get()
+            item['topResultRace'] = response.css('ul.moblist div a::text').getall()
+            item['raceType'] = response.css('ul.moblist div span.blue::text').getall()
+            item['raceRank'] = response.css('ul.moblist div::text').getall()
+            item['yearOfRace'] = response.css('ul.moblist div span::text').re(r'(\'\d.)')
+            item['team'] = response.css('div.div2 ul li span a::text').getall()
+            item['yearOfTeam'] = response.css('div.div2 ul li span::text').re(r'\d{4}')
+            item['keystatistics'] = response.css('div.div2 ul.key-stats li div a::text').getall()
+            item['keyNumber'] =  response.css('div.div2 ul.key-stats li div::text').getall()
+            item['keyword'] = response.css('div.div2 ul.key-stats li div span::text').getall()
+            item['season'] = response.css('div.div4 ul.ranking-per-season li div.season a::text').getall()
+            item['rps_points'] = response.css('div.div4 ul.ranking-per-season li div.bar div::text').getall()
+            item['rps_pos'] = response.css('div.div4 ul.ranking-per-season li div.pos::text').getall()
+            #item['season'] = response.css('div.div3 ul.horiztree li a::text').getall()
+            item['seasonLink'] = response.css('div.div3 a.seasonResults::attr(href)').getall()
+            item['prresHead'] = response.css('div.results ul.prresHead li::text').getall()
+            yield item
+            #prres table 
+        '''prres=response.xpath("//ul[@class='prres']")
+        #date
+        for div in prres.xpath('.//div[1]'):
+            item['prres_date']=div.xpath('.//text()').getall()
+            yield item
+        #race
+        for div in prres.xpath('.//div[5]'):
+           item['prres_race']=div.xpath('.//text()').getall()
+           yield item
+        #race link
+        for div in prres.xpath('.//div[5]'):
+            item['prres_race_link']=div.xpath('.//a//@href').getall()
+            yield item
+        #race result 
+        for div in prres.xpath('.//ul//li'):
+            item['prres_race_result']=div.xpath('.//div[2]//text()').get('')
+            yield item
+        #race distance
+        for div in prres.xpath('.//ul//li'):
+            item['prres_race_distance']=div.xpath('.//div[6]//text()').get('')
+            yield item
+            #pcs point
+        for div in prres.xpath('.//ul//li'):
+            item['prres_pcs_point']=div.xpath('.//div[7]//text()').get('')
+            yield item
+        #uci point
+        for div in prres.xpath('.//ul//li'):
+            item['prres_uci_point']=div.xpath('.//div[8]//text()').get('')
+            yield item
+        #race more detail
+        for div in prres.xpath('.//li'):
+            item['prres_race_more_detail']=div.xpath('.//div[9]//a//@href').get('')
             yield item
 
-        '''riderName = scrapy.Field()
+        allYears = response.xpath(".//a[@class=seasonResults]//@href").getall()
+        for singleYear in allYears:
+            if singleYear is not None:
+                yield response.follow(singleYear, self.parse)'''
+
+    '''riderName = scrapy.Field()
     teamName = scrapy.Field()
     country = scrapy.Field()
     riderCountryFlag = scrapy.Field()
