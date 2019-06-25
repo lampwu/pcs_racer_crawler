@@ -52,8 +52,8 @@ class PcsSpider(scrapy.Spider):
             item['keyword'] = response.css('div.div2 ul.key-stats li div span::text').getall()
             #PCS Ranking position per season
             item['season'] = response.css('div.div4 ul.ranking-per-season li div.season a::text').getall()
-            item['rps-points'] = response.css('div.div4 ul.ranking-per-season li div.bar div::text').getall()
-            item['rps-pos'] = response.css('div.div4 ul.ranking-per-season li div.pos::text').getall()
+            item['rps_points'] = response.css('div.div4 ul.ranking-per-season li div.bar div::text').getall()
+            item['rps_pos'] = response.css('div.div4 ul.ranking-per-season li div.pos::text').getall()
             #Results per season
             item['season'] = response.css('div.div3 ul.horiztree li a::text').getall()
             item['seasonLink'] = response.css('div.div3 a.seasonResults::attr(href)').getall()
