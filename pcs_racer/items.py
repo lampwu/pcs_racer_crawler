@@ -45,7 +45,14 @@ class pcsRacerItem(scrapy.Item):
     rps_pos = scrapy.Field()
     seasonLink = scrapy.Field()
     prresHead = scrapy.Field()
-    
+    prres_date = scrapy.Field()
+    prres_race = scrapy.Field()
+    prres_race_link = scrapy.Field()
+    prres_race_result = scrapy.Field()
+    prres_race_distance = scrapy.Field()
+    prres_pcs_point = scrapy.Field()
+    prres_uci_point = scrapy.Field()
+    prres_race_more_detail = scrapy.Field()
     #bio
 
         #riderName = response.css('div.content div.entry h1::text').get()

@@ -16,8 +16,8 @@ class PcsSpider(scrapy.Spider):
 
 
     def parse(self, response):
+        item = pcsRacerItem()
         for racer in response.css('body'):
-            item = pcsRacerItem()
             item['riderName'] = racer.css('div.content div.entry h1::text').get()
             item['teamName'] = racer.css('div.content div.entry h1 span::text')[1].get()
             item['country'] = racer.css('div.content div.entry span::attr(class)')[0].get()
@@ -53,43 +53,54 @@ class PcsSpider(scrapy.Spider):
             #item['season'] = response.css('div.div3 ul.horiztree li a::text').getall()
             item['seasonLink'] = response.css('div.div3 a.seasonResults::attr(href)').getall()
             item['prresHead'] = response.css('div.results ul.prresHead li::text').getall()
-            yield item
             #prres table 
-        '''prres=response.xpath("//ul[@class='prres']")
+        prres=response.xpath(".//ul[@class='prres']")
         #date
+        p0 = []
         for div in prres.xpath('.//div[1]'):
-            item['prres_date']=div.xpath('.//text()').getall()
-            yield item
+            #item1['prres_date']
+            #item['prres_date']
+            p0.append(div.xpath('.//text()').get(''))
+            #item['prres_date']=p1
+        item['prres_date']= p0
+        
         #race
+        p1 = []
         for div in prres.xpath('.//div[5]'):
-           item['prres_race']=div.xpath('.//text()').getall()
-           yield item
+            p1.append(div.xpath('.//text()').get(''))
         #race link
+        item['prres_race'] = p1
+        p2 = []
         for div in prres.xpath('.//div[5]'):
-            item['prres_race_link']=div.xpath('.//a//@href').getall()
-            yield item
+            p2.append(div.xpath('.//a//@href').get(''))
+        item['prres_race_link'] = p2
         #race result 
+        p3 = []
         for div in prres.xpath('.//ul//li'):
-            item['prres_race_result']=div.xpath('.//div[2]//text()').get('')
-            yield item
+            p3.append(div.xpath('.//div[2]//text()').get(''))
+        item['prres_race_result'] = p3
         #race distance
+        p4 = []
         for div in prres.xpath('.//ul//li'):
-            item['prres_race_distance']=div.xpath('.//div[6]//text()').get('')
-            yield item
+            p4.append(div.xpath('.//div[6]//text()').get(''))
+        item['prres_race_distance'] = p4
             #pcs point
+        p5 = []
         for div in prres.xpath('.//ul//li'):
-            item['prres_pcs_point']=div.xpath('.//div[7]//text()').get('')
-            yield item
+            p5.append(div.xpath('.//div[7]//text()').get(''))
+        item['prres_pcs_point'] = p5
         #uci point
+        p6 = []
         for div in prres.xpath('.//ul//li'):
-            item['prres_uci_point']=div.xpath('.//div[8]//text()').get('')
-            yield item
+            p6.append(div.xpath('.//div[8]//text()').get(''))
+        item['prres_uci_point'] = p6
         #race more detail
+        p7 = []
         for div in prres.xpath('.//li'):
-            item['prres_race_more_detail']=div.xpath('.//div[9]//a//@href').get('')
-            yield item
-
-        allYears = response.xpath(".//a[@class=seasonResults]//@href").getall()
+            p7.append(div.xpath('.//div[9]//a//@href').get(''))
+        item['prres_race_more_detail'] = p7
+        yield item
+        '''allYears = response.xpath(".//a[@class=seasonResults]//@href").getall()
         for singleYear in allYears:
             if singleYear is not None:
                 yield response.follow(singleYear, self.parse)'''
