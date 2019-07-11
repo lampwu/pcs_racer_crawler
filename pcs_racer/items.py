@@ -11,6 +11,7 @@ import scrapy
 class pcsRacerItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    detailOfYear = scrapy.Field()
     riderName = scrapy.Field()
     teamName = scrapy.Field()
     country = scrapy.Field()
@@ -45,7 +46,7 @@ class pcsRacerItem(scrapy.Item):
     rps_pos = scrapy.Field()
     seasonLink = scrapy.Field()
     prresHead = scrapy.Field()
-    prres_date = scrapy.Field()
+    '''prres_date = scrapy.Field()
     prres_race = scrapy.Field()
     prres_race_link = scrapy.Field()
     prres_race_result = scrapy.Field()
@@ -53,6 +54,7 @@ class pcsRacerItem(scrapy.Item):
     prres_pcs_point = scrapy.Field()
     prres_uci_point = scrapy.Field()
     prres_race_more_detail = scrapy.Field()
+    detailOfYear = scrapy.Field()'''
     #bio
 
         #riderName = response.css('div.content div.entry h1::text').get()
